@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "ETLProyectoOpiniones": {
+      "commandName": "Project"
+    },
+    "Container (Dockerfile)": {
+      "commandName": "Docker"
+    }
+  }
+}

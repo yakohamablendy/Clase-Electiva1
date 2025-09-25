@@ -30,4 +30,8 @@ El programa se conecta a la base de datos SQL Server. Antes de insertar, borra t
 
 ## 3. Resultados y Evidencias
 
-(Aquí puedes arrastrar y pegar las 5 capturas de pantalla para que se vean directamente en la documentación)
+<img width="1366" height="768" alt="Tabla Opiniones" src="https://github.com/user-attachments/assets/c49dff21-6a2d-40b7-ac60-9c3320adad2b" />
+<img width="1366" height="768" alt="Tabla Fuentes" src="https://github.com/user-attachments/assets/5163bae8-27d1-4a9f-aba5-67eb3f4580c8" />
+<img width="1366" height="768" alt="Tabla Clientes" src="https://github.com/user-attachments/assets/42aa8a5d-29b1-44f9-9cf9-3bc9bf548cd8" />
+<img width="1366" height="768" alt="cantidad de registros subida " src="https://github.com/user-attachments/assets/8b07e6ff-6d7c-4dae-858a-ea7aaf750b39" />
+<img width="1366" height="768" alt="Tabla Productos" src="https://github.com/user-attachments/assets/ed7306d9-4d5e-4b05-8b8c-cbdc724862de" />

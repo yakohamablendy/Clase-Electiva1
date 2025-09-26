@@ -1,44 +1,29 @@
-﻿using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
+﻿using System.Globalization;
 using CsvHelper;
 
 namespace ETLProyectoOpiniones
 {
     public class Extraccion
     {
-        public static (List<Cliente>, List<Fuente>, List<Producto>, List<Opinion>) ExtraerDatos()
+        public static (List<ClienteCsv>, List<FuenteCsv>, List<ProductoCsv>, List<ComentarioSocialCsv>, List<EncuestaCsv>, List<ResenaWebCsv>) ExtraerDatos()
         {
-            List<Cliente> clientes;
-            List<Fuente> fuentes;
-            List<Producto> productos;
-            List<Opinion> opiniones;
+            var clientes = LeerCsv<ClienteCsv>("datos_csv/clients.csv");
+            var fuentes = LeerCsv<FuenteCsv>("datos_csv/fuente_datos.csv");
+            var productos = LeerCsv<ProductoCsv>("datos_csv/products.csv");
+            var comentarios = LeerCsv<ComentarioSocialCsv>("datos_csv/social_comments.csv");
+            var encuestas = LeerCsv<EncuestaCsv>("datos_csv/surveys_part1.csv");
+            var resenas = LeerCsv<ResenaWebCsv>("datos_csv/web_reviews.csv");
 
-            using (var reader = new StreamReader("datos_csv/clientes.csv"))
+            return (clientes, fuentes, productos, comentarios, encuestas, resenas);
+        }
+
+        private static List<T> LeerCsv<T>(string rutaArchivo)
+        {
+            using (var reader = new StreamReader(rutaArchivo))
             using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
             {
-                clientes = csv.GetRecords<Cliente>().ToList();
+                return csv.GetRecords<T>().ToList();
             }
-
-            using (var reader = new StreamReader("datos_csv/fuentes.csv"))
-            using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
-            {
-                fuentes = csv.GetRecords<Fuente>().ToList();
-            }
-
-            using (var reader = new StreamReader("datos_csv/productos.csv"))
-            using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
-            {
-                productos = csv.GetRecords<Producto>().ToList();
-            }
-
-            using (var reader = new StreamReader("datos_csv/opiniones.csv"))
-            using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
-            {
-                opiniones = csv.GetRecords<Opinion>().ToList();
-            }
-
-            return (clientes, fuentes, productos, opiniones);
         }
     }
 }

@@ -8,24 +8,20 @@ namespace ETLProyectoOpiniones
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine("--- INICIO DEL PROCESO ETL ---");
-
+            Console.WriteLine("--- INICIO DEL PROCESO ETL CON DATOS REALES ---");
             try
             {
-                var config = new ConfigurationBuilder()
-                    .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.json")
-                    .Build();
-
+                var config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
                 var connectionString = config.GetConnectionString("DefaultConnection");
 
-                var (clientes, fuentes, productos, opiniones) = Extraccion.ExtraerDatos();
+                var (clientesCsv, fuentesCsv, productosCsv, comentariosCsv, encuestasCsv, resenasCsv) = Extraccion.ExtraerDatos();
                 Console.WriteLine("FASE 1: EXTRACCIÓN COMPLETADA.");
 
-                var clientesLimpios = Transformacion.LimpiarClientes(clientes);
+                var (clientesLimpios, productosLimpios, fuentesLimpias, opinionesUnificadas) = Transformacion.TransformarDatos(
+                    clientesCsv, fuentesCsv, productosCsv, comentariosCsv, encuestasCsv, resenasCsv);
                 Console.WriteLine("FASE 2: TRANSFORMACIÓN COMPLETADA.");
 
-                Carga.CargarDatos(connectionString, clientesLimpios, fuentes, productos, opiniones);
+                Carga.CargarDatos(connectionString, clientesLimpios, productosLimpios, fuentesLimpias, opinionesUnificadas);
                 Console.WriteLine("FASE 3: CARGA COMPLETADA.");
 
                 Console.WriteLine("\n--- PROCESO ETL FINALIZADO CON ÉXITO ---");
@@ -33,7 +29,7 @@ namespace ETLProyectoOpiniones
             catch (Exception ex)
             {
                 Console.WriteLine("\n--- ERROR EN EL PROCESO ---");
-                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.ToString());
             }
 
             Console.WriteLine("\nPresiona una tecla para salir.");

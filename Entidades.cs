@@ -6,34 +6,89 @@ using System.Threading.Tasks;
 
 namespace ETLProyectoOpiniones
 {
-    public class Cliente
+    // --- Clases para leer los archivos CSV originales ---
+
+    public class ClienteCsv
     {
-        public int id_cliente { get; set; }
-        public string nombre_cliente { get; set; }
-        public string email { get; set; }
+        public int IdCliente { get; set; }
+        public string Nombre { get; set; }
+        public string Email { get; set; }
     }
 
-    public class Fuente
+    public class FuenteCsv
     {
-        public int id_fuente { get; set; }
-        public string nombre_fuente { get; set; }
+        public string IdFuente { get; set; }
+        public string TipoFuente { get; set; }
+        public DateTime FechaCarga { get; set; }
+    }
+
+    public class ProductoCsv
+    {
+        public int IdProducto { get; set; }
+        public string Nombre { get; set; }
+        public string Categoria { get; set; }
+    }
+
+    public class ComentarioSocialCsv
+    {
+        public string IdComment { get; set; }
+        public string IdCliente { get; set; }
+        public string IdProducto { get; set; }
+        public string Fuente { get; set; }
+        public DateTime Fecha { get; set; }
+        public string Comentario { get; set; }
+    }
+
+    public class EncuestaCsv
+    {
+        public int IdOpinion { get; set; }
+        public int IdCliente { get; set; }
+        public int IdProducto { get; set; }
+        public DateTime Fecha { get; set; }
+        public string Comentario { get; set; }
+        public int PuntajeSatisfaccion { get; set; }
+    }
+
+    public class ResenaWebCsv
+    {
+        public string IdReview { get; set; }
+        public string IdCliente { get; set; }
+        public string IdProducto { get; set; }
+        public DateTime Fecha { get; set; }
+        public string Comentario { get; set; }
+        public int Rating { get; set; }
+    }
+
+    // --- Clases para las tablas finales de la Base de Datos ---
+
+    public class Cliente
+    {
+        public int IdCliente { get; set; }
+        public string Nombre { get; set; }
+        public string Email { get; set; }
     }
 
     public class Producto
     {
-        public int id_producto { get; set; }
-        public string nombre_producto { get; set; }
-        public string categoria { get; set; }
+        public int IdProducto { get; set; }
+        public string Nombre { get; set; }
+        public string Categoria { get; set; }
+    }
+
+    public class Fuente
+    {
+        public string IdFuente { get; set; }
+        public string TipoFuente { get; set; }
+        public DateTime FechaCarga { get; set; }
     }
 
     public class Opinion
     {
-        public int id_opinion { get; set; }
-        public int id_cliente { get; set; }
-        public int id_producto { get; set; }
-        public int id_fuente { get; set; }
-        public DateTime fecha { get; set; }
-        public string texto_opinion { get; set; }
-        public int calificacion { get; set; }
+        public int IdCliente { get; set; }
+        public int IdProducto { get; set; }
+        public string IdFuente { get; set; }
+        public DateTime Fecha { get; set; }
+        public string Comentario { get; set; }
+        public int Calificacion { get; set; }
     }
 }

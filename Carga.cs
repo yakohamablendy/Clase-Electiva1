@@ -5,40 +5,40 @@ namespace ETLProyectoOpiniones
 {
     public class Carga
     {
-        public static void CargarDatos(string connectionString, List<Cliente> clientes, List<Fuente> fuentes, List<Producto> productos, List<Opinion> opiniones)
+        public static void CargarDatos(string connectionString, List<Cliente> clientes, List<Producto> productos, List<Fuente> fuentes, List<Opinion> opiniones)
         {
             using (var connection = new SqlConnection(connectionString))
             {
                 connection.Open();
 
-                var command = connection.CreateCommand();
+                new SqlCommand("DELETE FROM Opiniones; DELETE FROM Clientes; DELETE FROM Productos; DELETE FROM Fuentes;", connection).ExecuteNonQuery();
 
-                command.CommandText = "DELETE FROM Opiniones; DELETE FROM Clientes; DELETE FROM Fuentes; DELETE FROM Productos;";
-                command.ExecuteNonQuery();
-
-                foreach (var fuente in fuentes)
+                foreach (var f in fuentes)
                 {
-                    command.CommandText = $"INSERT INTO Fuentes (id_fuente, nombre_fuente) VALUES ({fuente.id_fuente}, '{fuente.nombre_fuente}');";
-                    command.ExecuteNonQuery();
+                    new SqlCommand($"INSERT INTO Fuentes (IdFuente, TipoFuente, FechaCarga) VALUES ('{f.IdFuente}', '{f.TipoFuente}', '{f.FechaCarga:yyyy-MM-dd}');", connection).ExecuteNonQuery();
                 }
+                Console.WriteLine($"{fuentes.Count} Fuentes cargadas.");
 
-                foreach (var cliente in clientes)
+                foreach (var c in clientes)
                 {
-                    command.CommandText = $"INSERT INTO Clientes (id_cliente, nombre_cliente, email) VALUES ({cliente.id_cliente}, '{cliente.nombre_cliente}', '{cliente.email}');";
-                    command.ExecuteNonQuery();
+                    new SqlCommand($"INSERT INTO Clientes (IdCliente, Nombre, Email) VALUES ({c.IdCliente}, '{c.Nombre.Replace("'", "''")}', '{c.Email}');", connection).ExecuteNonQuery();
                 }
+                Console.WriteLine($"{clientes.Count} Clientes cargados.");
 
-                foreach (var producto in productos)
+                foreach (var p in productos)
                 {
-                    command.CommandText = $"INSERT INTO Productos (id_producto, nombre_producto, categoria) VALUES ({producto.id_producto}, '{producto.nombre_producto}', '{producto.categoria}');";
-                    command.ExecuteNonQuery();
+                    new SqlCommand($"INSERT INTO Productos (IdProducto, Nombre, Categoria) VALUES ({p.IdProducto}, '{p.Nombre.Replace("'", "''")}', '{p.Categoria.Replace("'", "''")}');", connection).ExecuteNonQuery();
                 }
+                Console.WriteLine($"{productos.Count} Productos cargados.");
 
-                foreach (var opinion in opiniones)
+                foreach (var o in opiniones)
                 {
-                    command.CommandText = $"INSERT INTO Opiniones (id_opinion, id_cliente, id_producto, id_fuente, fecha, texto_opinion, calificacion) VALUES ({opinion.id_opinion}, {opinion.id_cliente}, {opinion.id_producto}, {opinion.id_fuente}, '{opinion.fecha:yyyy-MM-dd}', '{opinion.texto_opinion}', {opinion.calificacion});";
-                    command.ExecuteNonQuery();
+                    string idClienteSql = (o.IdCliente == 0) ? "NULL" : o.IdCliente.ToString();
+                    string comentarioSql = o.Comentario?.Replace("'", "''") ?? "";
+
+                    new SqlCommand($"INSERT INTO Opiniones (IdCliente, IdProducto, IdFuente, Fecha, Comentario, Calificacion) VALUES ({idClienteSql}, {o.IdProducto}, '{o.IdFuente}', '{o.Fecha:yyyy-MM-dd}', '{comentarioSql}', {o.Calificacion});", connection).ExecuteNonQuery();
                 }
+                Console.WriteLine($"{opiniones.Count} Opiniones cargadas.");
             }
         }
     }

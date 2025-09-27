@@ -18,7 +18,7 @@ namespace ETLProyectoOpiniones
                 .ToList();
 
             var productosLimpios = productosCsv
-                .Select(p => new Producto { IdProducto = p.IdProducto, Nombre = p.Nombre, Categoria = p.Categoria })
+                .Select(p => new Producto { IdProducto = p.IdProducto, Nombre = p.Nombre, Categoria = p.Categoría })
                 .ToList();
 
             var fuentesLimpias = fuentesCsv
@@ -49,7 +49,7 @@ namespace ETLProyectoOpiniones
                     IdFuente = ObtenerIdFuente("Encuesta", fuentesLimpias),
                     Fecha = e.Fecha,
                     Comentario = e.Comentario,
-                    Calificacion = e.PuntajeSatisfaccion
+                    Calificacion = e.PuntajeSatisfacción
                 });
             }
 
@@ -90,6 +90,11 @@ namespace ETLProyectoOpiniones
             if (tipo.Contains("Instagram") || tipo.Contains("Twitter") || tipo.Contains("Facebook"))
             {
                 tipo = "Red Social";
+            }
+            
+            if (tipo.Equals("Encuesta", StringComparison.OrdinalIgnoreCase))
+            {
+                tipo = "CSV";
             }
             return fuentes.FirstOrDefault(f => f.TipoFuente.Equals(tipo, StringComparison.OrdinalIgnoreCase))?.IdFuente ?? "F000";
         }

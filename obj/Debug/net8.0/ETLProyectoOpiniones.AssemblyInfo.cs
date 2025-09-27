@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ETLProyectoOpiniones")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4ac628317628f90beb79f65955cd846f23721c82")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+36b1abf5321e3ece8eff30bec081967943aa6281")]
 [assembly: System.Reflection.AssemblyProductAttribute("ETLProyectoOpiniones")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ETLProyectoOpiniones")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

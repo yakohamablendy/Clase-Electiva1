@@ -8,7 +8,7 @@ namespace ETLProyectoOpiniones
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine("--- INICIO DEL PROCESO ETL CON DATOS REALES ---");
+            Console.WriteLine("--- INICIANDO EL DEL PROCESO ETL CON DATOS REALES ---");
             try
             {
                 var config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
@@ -24,7 +24,7 @@ namespace ETLProyectoOpiniones
                 Carga.CargarDatos(connectionString, clientesLimpios, productosLimpios, fuentesLimpias, opinionesUnificadas);
                 Console.WriteLine("FASE 3: CARGA COMPLETADA.");
 
-                Console.WriteLine("\n--- PROCESO ETL FINALIZADO CON ÉXITO ---");
+                Console.WriteLine("\n--- PROCESO FINALIZADO CON ÉXITO ---");
             }
             catch (Exception ex)
             {

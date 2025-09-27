@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ETLProyectoOpiniones
+﻿namespace ETLProyectoOpiniones
 {
     // --- Clases para leer los archivos CSV originales ---
 
@@ -26,7 +20,7 @@ namespace ETLProyectoOpiniones
     {
         public int IdProducto { get; set; }
         public string Nombre { get; set; }
-        public string Categoria { get; set; }
+        public string Categoría { get; set; } // Corregido con acento
     }
 
     public class ComentarioSocialCsv
@@ -46,7 +40,7 @@ namespace ETLProyectoOpiniones
         public int IdProducto { get; set; }
         public DateTime Fecha { get; set; }
         public string Comentario { get; set; }
-        public int PuntajeSatisfaccion { get; set; }
+        public int PuntajeSatisfacción { get; set; } 
     }
 
     public class ResenaWebCsv

@@ -13,7 +13,8 @@ La base de datos se diseñó con cuatro entidades principales para asegurar la i
 
 ### Diagrama Entidad-Relación (ER)
 
-(Aquí puedes arrastrar y soltar la imagen de tu diagrama que creaste en draw.io para que se inserte automáticamente)
+<img width="641" height="541" alt="Diagrama de la base de datos drawio" src="https://github.com/user-attachments/assets/55472d30-de64-4289-900e-edfcf54ed960" />
+
 
 ## 2. Flujo de Trabajo del Pipeline ETL
 
